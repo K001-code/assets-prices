@@ -24,7 +24,7 @@ def main():
     p_lb_asset = ["HG",]
     p_coin_asset = ["BTC", "ETH", ]
 
-    unit = get_unit("Unit of measurement: ", find)
+    unit = get_unit("Enter unit of measurement (name/symbol): ", find)
     qty = get_pos_int("Enter amount: ")
     total = cal(unit, qty, price_p_unit, find)
     print(f"Your total: ${total:.2f}")
@@ -52,9 +52,12 @@ def get_symbl(text, name, sym):
 def get_unit(text, sym):
     while True:
         if sym in p_oz_asset or sym in p_lb_asset:
-            measurements = {"ounce": "oz", "gram": "g", "kilogram": "kg", "ជី": "ji"}
-            print("\nounce(oz), gram(g), kilogram(kg), ជី(ji)")
-            unit = input(text).lower()
+            measurements = {"Ounce": "Oz", "Gram": "G", "Kilogram": "Kg", "ជី": "Ji"}
+            print("\n", "Name:".center(20), "Symbol:".center(20))
+            for name in measurements.keys():
+                print(f"{name}".center(20), f"{measurements[name]}".center(20))
+            
+            unit = input(text).capitalize()
             if unit in measurements.keys():
                 return measurements[unit]
             elif unit in measurements.values():
